@@ -14,7 +14,8 @@ class RankData:
         self.indices = pd.Series(['SPY', '^NSEI'])
         self.symbol_count = symbol_count
         if target == "US":
-            self.target_symbols = "US_Symbols.csv"
+            # self.target_symbols = "US_Symbols.csv"
+            self.target_symbols = "USETFs.csv"
             self.country = "United States"
         else:
             self.target_symbols = "IND_Symbols.csv"
