@@ -5,7 +5,7 @@ import pandas as pd
 
 
 class Strategy:
-    def __init__(self, target="US"):
+    def __init__(self, target="US", capital="100000", max_positions="20"):
         self.rank_data_location = "./rank_data/"
         self.stock_data_location = "./stock_data/"
         self.portfolio = pd.DataFrame()
@@ -14,6 +14,9 @@ class Strategy:
         self.cnt_max_open_pos = 0
         self.is_long_only = True
         self.index_df = pd.DataFrame()
+        self.max_positions = max_positions
+        self.capital = capital
+        self.investment_per_stock = self.capital/self.max_positions
 
         if target == 'US':
             self.index_file_name = self.stock_data_location + "SPY" + ".csv"
@@ -223,7 +226,7 @@ class Strategy:
         ranked_files = glob.glob(self.rank_data_location + "*_*.csv")
         ranked_files.sort()
         i = 0
-        max_positions = 10
+        max_positions = 40
         long_short_dict = {}
         long_short_list = []
         ma_long_short_dict = {}
@@ -303,7 +306,7 @@ class Strategy:
                             'Ticker': row[1].Ticker,
                             'Entry_Price': row[1].Open,
                             'SL_Price': row[1].ema8,
-                            'Qty': round(5000 / row[1].Open),
+                            'Qty': round(self.investment_per_stock / row[1].Open),
                             'Exit_Date': '',
                             'Exit_Price': '',
                             'Gain': '',
@@ -338,7 +341,7 @@ class Strategy:
                             'Ticker': row[1].Ticker,
                             'Entry_Price': row[1].Open,
                             'SL_Price': row[1].ema8,
-                            'Qty': round(5000 / row[1].Open),
+                            'Qty': round(self.investment_per_stock / row[1].Open),
                             'Exit_Date': '',
                             'Exit_Price': '',
                             'Gain': '',
