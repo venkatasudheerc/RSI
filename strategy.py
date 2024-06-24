@@ -14,8 +14,8 @@ class Strategy:
         self.cnt_max_open_pos = 0
         self.is_long_only = True
         self.index_df = pd.DataFrame()
-        self.max_positions = max_positions
-        self.capital = capital
+        self.max_positions = int(max_positions)
+        self.capital = int(capital)
         self.investment_per_stock = self.capital/self.max_positions
 
         if target == 'US':
