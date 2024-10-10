@@ -16,10 +16,10 @@ class YFinance:
         self.data = None
         self.ticker = ticker
         self.period = period
-        self.interval = interval
+        self.interval = "1d"
         self.country = country
         self.file_name = data_location + ticker.upper() + ".csv"
-        self.magic = 1
+        self.magic = 0
 
         '''
         if ticker[0] == '^':
@@ -43,7 +43,9 @@ class YFinance:
                 self.data = yf.download(tickers=self.ticker, period=self.period, interval=self.interval,
                                         start="2024-01-01", end=end_date)
         else:
-            self.data = yf.download(tickers=self.ticker, period="60d", interval="90m")
+            # self.data = yf.download(tickers=self.ticker, period="60d", interval="90m")
+            self.data = yf.download(tickers=self.ticker, period=self.period, interval=self.interval, start="2024-01-01",
+                                    end=end_date)
         return self.data
 
     def load_data(self):
@@ -101,11 +103,12 @@ class YFinance:
             self.data['bearish'] = self.data.apply(lambda x: x.ema8 < x.ema13 and x.rdx < 50, axis=1)
             self.data['bull_signal'] = self.data['bullish'] & self.data['bullish'].rolling(2).sum().eq(1)
             self.data['bear_signal'] = self.data['bearish'] & self.data['bearish'].rolling(2).sum().eq(1)
-
+            '''
             if self.interval != "1d" or (self.magic and (self.ticker == "SPY" or self.ticker == "^NSEI")):
                 self.data['date1'] = pd.to_datetime(self.data['Datetime']).dt.date
                 self.data = self.data.drop_duplicates(subset='date1', keep="last")
                 self.data = self.data.rename(columns={"Datetime": "Date"})
+            '''
 
             logging.info("Custom data added")
 

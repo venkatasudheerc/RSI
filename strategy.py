@@ -5,13 +5,14 @@ import pandas as pd
 
 
 class Strategy:
-    def __init__(self, target="US", capital="100000", max_positions="20"):
+    def __init__(self, target="US", capital="100000", max_positions="20", is_long=True):
         self.rank_data_location = "./rank_data/"
         self.stock_data_location = "./stock_data/"
         self.portfolio = pd.DataFrame()
         self.closed_pos = pd.DataFrame()
         self.long_short_df = pd.DataFrame()
         self.cnt_max_open_pos = 0
+        self.is_long_override = is_long
         self.is_long_only = True
         self.index_df = pd.DataFrame()
         self.max_positions = int(max_positions)
@@ -285,6 +286,8 @@ class Strategy:
                     break
 
             # print(short_df)
+
+            self.is_long_only = self.is_long_override
 
             if self.is_long_only:
                 if len(self.portfolio.index) > 0:

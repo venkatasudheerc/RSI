@@ -6,7 +6,7 @@ import shutil
 
 
 class RankData:
-    def __init__(self, target="US", symbol_count="200", interval="1d"):
+    def __init__(self, target="US", symbol_count="200", interval="1d", symbols=""):
         self.symbols = None
         self.data_interval = interval
         self.data_location = "./stock_data/"
@@ -14,8 +14,15 @@ class RankData:
         self.indices = pd.Series(['SPY', '^NSEI'])
         self.symbol_count = symbol_count
         if target == "US":
-            # self.target_symbols = "US_Symbols.csv"
-            self.target_symbols = "USETFs.csv"
+            self.target_symbols = "US_Symbols.csv"
+
+            if symbols == "US1000":
+                self.target_symbols = "US1000.csv"
+            elif symbols == "USETFs":
+                self.target_symbols = "USETFs.csv"
+            else:
+                self.target_symbols = "US_Symbols.csv"
+
             self.country = "United States"
         else:
             self.target_symbols = "IND_Symbols.csv"
