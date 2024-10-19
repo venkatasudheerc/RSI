@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
     target = "US"
     if target == "US":
-        startDate = "20240912"
+        startDate = "20240906"
     else:
         startDate = "20240205"
 
@@ -33,12 +33,12 @@ if __name__ == '__main__':
         # ranking based on RDX
         rank = rankData.RankData(target, interval="1d")
         # rank = rankData.RankData(target, interval="1d", isETFs=True)
-        # df = rank.load_data()
-        # rank.rank_data()
+        df = rank.load_data()
+        rank.rank_data()
 
         # Strategy test
         # testStrategy = strategy.Strategy(target, capital="100000", max_positions=10, is_long=True)
-        testStrategy = strategy.Strategy(target, capital="150000", max_positions=10, is_long=False)
+        testStrategy = strategy.Strategy(target, capital="100000", max_positions=10, is_long=True)
         testStrategy.load_index()
         testStrategy.evaluate(start_date=startDate)
 

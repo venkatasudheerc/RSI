@@ -272,22 +272,23 @@ class Strategy:
             elif d == start_date:
                 self.exit_current_portfolio(df, d)
 
-            self.index_df.reset_index(drop=True, inplace=True)
-            for index, row in self.index_df.iterrows():
-                if row.Date < d:
-                    continue
-                elif row.Date <= d:
-                    is_long = True if row.signal == "LONG" else False
-                    if is_long != self.is_long_only:
-                        if len(self.portfolio.index) > 0:
-                            self.exit_current_portfolio(df, d)
-                        self.is_long_only = is_long
-                else:
-                    break
+            if self.is_long_override:
+                self.index_df.reset_index(drop=True, inplace=True)
+                for index, row in self.index_df.iterrows():
+                    if row.Date < d:
+                        continue
+                    elif row.Date <= d:
+                        is_long = True if row.signal == "LONG" else False
+                        if is_long != self.is_long_only:
+                            if len(self.portfolio.index) > 0:
+                                self.exit_current_portfolio(df, d)
+                            self.is_long_only = is_long
+                    else:
+                        break
+            else:
+                self.is_long_only = False
 
             # print(short_df)
-
-            self.is_long_only = self.is_long_override
 
             if self.is_long_only:
                 if len(self.portfolio.index) > 0:
