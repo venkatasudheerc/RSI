@@ -28,17 +28,17 @@ class YFinance:
         if self.interval == "1d":
             if self.ticker == "SPY" or self.ticker == "^NSEI":
                 if self.magic:
-                    self.data = yf.download(tickers=self.ticker, period="60d", interval="90m")
+                    self.data = yf.download(tickers=self.ticker, period="60d", interval="90m", multi_level_index=False)
                 else:
                     self.data = yf.download(tickers=self.ticker, period=self.period, interval=self.interval,
-                                            start="2019-09-01", end=end_date)
+                                            start="2019-09-01", end=end_date, multi_level_index=False)
             else:
                 self.data = yf.download(tickers=self.ticker, period=self.period, interval=self.interval,
-                                        start="2019-09-01", end=end_date)
+                                        start="2019-09-01", end=end_date, multi_level_index=False)
         else:
             # self.data = yf.download(tickers=self.ticker, period="60d", interval="90m")
             self.data = yf.download(tickers=self.ticker, period=self.period, interval=self.interval, start="2024-01-01",
-                                    end=end_date)
+                                    end=end_date, multi_level_index=False)
         return self.data
 
     def load_data(self):

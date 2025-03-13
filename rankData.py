@@ -41,7 +41,7 @@ class RankData:
         # print((self.symbols.append(indices, ignore_index=True)))
         i = 0
         try:
-            for stock in self.symbols.append(self.indices, ignore_index=True)[i:]:
+            for stock in self.symbols._append(self.indices, ignore_index=True)[i:]:
                 yf = yFin.YFinance(ticker=stock, interval=self.data_interval, data_location=self.data_location,
                                    country=self.country)
                 # print(yf.tail(1))
