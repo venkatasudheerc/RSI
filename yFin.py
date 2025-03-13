@@ -21,13 +21,6 @@ class YFinance:
         self.file_name = data_location + ticker.upper() + ".csv"
         self.magic = 0
 
-        '''
-        if ticker[0] == '^':
-            self.file_name = data_location + ticker[1:].upper() + ".csv"
-        else:
-            self.file_name = data_location + ticker.upper() + ".csv"
-        '''
-
     def fetch_data(self):
         now = datetime.now() + timedelta(days=1)
         end_date = now.strftime("%Y-%m-%d")
@@ -38,10 +31,10 @@ class YFinance:
                     self.data = yf.download(tickers=self.ticker, period="60d", interval="90m")
                 else:
                     self.data = yf.download(tickers=self.ticker, period=self.period, interval=self.interval,
-                                            start="2024-01-01", end=end_date)
+                                            start="2019-09-01", end=end_date)
             else:
                 self.data = yf.download(tickers=self.ticker, period=self.period, interval=self.interval,
-                                        start="2024-01-01", end=end_date)
+                                        start="2019-09-01", end=end_date)
         else:
             # self.data = yf.download(tickers=self.ticker, period="60d", interval="90m")
             self.data = yf.download(tickers=self.ticker, period=self.period, interval=self.interval, start="2024-01-01",
