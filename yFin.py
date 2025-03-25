@@ -31,10 +31,10 @@ class YFinance:
                     self.data = yf.download(tickers=self.ticker, period="60d", interval="90m", multi_level_index=False)
                 else:
                     self.data = yf.download(tickers=self.ticker, period=self.period, interval=self.interval,
-                                            start="2019-09-01", end=end_date, multi_level_index=False)
+                                            start="2024-09-01", end=end_date, multi_level_index=False)
             else:
                 self.data = yf.download(tickers=self.ticker, period=self.period, interval=self.interval,
-                                        start="2019-09-01", end=end_date, multi_level_index=False)
+                                        start="2024-09-01", end=end_date, multi_level_index=False)
         else:
             # self.data = yf.download(tickers=self.ticker, period="60d", interval="90m")
             self.data = yf.download(tickers=self.ticker, period=self.period, interval=self.interval, start="2024-01-01",
@@ -89,7 +89,7 @@ class YFinance:
             self.data['ema8'] = indicator_ema2.ema_indicator()
             self.data['ema13'] = indicator_ema3.ema_indicator()
             self.data['macd_diff'] = indicator_macd.macd_diff()
-            self.data['adx_diff'] = abs(abs((indicator_adx.adx_pos() - indicator_adx.adx_neg())).diff())
+            self.data['adx_diff'] = abs((indicator_adx.adx_pos() - indicator_adx.adx_neg()))
             self.data['spike_exists'] = self.data['adx_diff'].gt(20)
             self.data['spike14'] = self.data['spike_exists'].rolling(14).mean().gt(0)
             self.data['bullish'] = self.data.apply(lambda x: x.ema8 > x.ema13 and x.rdx > 50, axis=1)

@@ -93,7 +93,6 @@ class Strategy:
                         'Signal': row.Signal,
                         'Ticker': row.Ticker,
                         'Entry_Price': row.Entry_Price,
-                        'SL_Price': row.SL_Price,
                         'Qty': row.Qty,
                         'Exit_Date': d,
                         'Exit_Price': df_row.iloc[0]['Open'],
@@ -109,7 +108,6 @@ class Strategy:
                         'Signal': row.Signal,
                         'Ticker': row.Ticker,
                         'Entry_Price': row.Entry_Price,
-                        'SL_Price': row.SL_Price,
                         'Qty': row.Qty,
                         'Exit_Date': d,
                         'Exit_Price': df_row.iloc[0]['Open'],
@@ -145,7 +143,6 @@ class Strategy:
                         'Signal': row.Signal,
                         'Ticker': row.Ticker,
                         'Entry_Price': row.Entry_Price,
-                        'SL_Price': row.SL_Price,
                         'Qty': row.Qty,
                         'Exit_Date': d,
                         'Exit_Price': df_row.iloc[0]['Open'],
@@ -161,7 +158,6 @@ class Strategy:
                         'Signal': row.Signal,
                         'Ticker': row.Ticker,
                         'Entry_Price': row.Entry_Price,
-                        'SL_Price': row.SL_Price,
                         'Qty': row.Qty,
                         'Exit_Date': d,
                         'Exit_Price': df_row.iloc[0]['Open'],
@@ -204,7 +200,6 @@ class Strategy:
                         'Signal': row.Signal,
                         'Ticker': row.Ticker,
                         'Entry_Price': row.Entry_Price,
-                        'SL_Price': row.SL_Price,
                         'Qty': row.Qty,
                         'Exit_Date': d,
                         'Exit_Price': df_row.iloc[0]['Open'],
@@ -244,8 +239,8 @@ class Strategy:
             long_df = df[df['rsi'] > 55]
             long_df = long_df[long_df['rsi5'] > 60]
 
-            short_df = df[df['rsi'] < 35]
-            short_df = short_df[short_df['rsi5'] < 30]
+            short_df = df[df['rsi'] < 40]
+            short_df = short_df[short_df['rsi5'] < 35]
 
             ma_long_df = df[df['bull_signal'] == True]
             ma_short_df = df[df['bear_signal'] > 0]
@@ -308,9 +303,8 @@ class Strategy:
                             'Entry_Date': d,
                             'Signal': "Long" if self.is_long_only else "SHORT",
                             'Ticker': row[1].Ticker,
-                            'Entry_Price': row[1].Open,
-                            'SL_Price': row[1].ema8,
-                            'Qty': round(self.investment_per_stock / row[1].Open),
+                            'Entry_Price': row[1].Close,
+                            'Qty': round(self.investment_per_stock / row[1].Close),
                             'Exit_Date': '',
                             'Exit_Price': '',
                             'Gain': '',
@@ -343,9 +337,8 @@ class Strategy:
                             'Entry_Date': d,
                             'Signal': "Long" if self.is_long_only else "SHORT",
                             'Ticker': row[1].Ticker,
-                            'Entry_Price': row[1].Open,
-                            'SL_Price': row[1].ema8,
-                            'Qty': round(self.investment_per_stock / row[1].Open),
+                            'Entry_Price': row[1].Close,
+                            'Qty': round(self.investment_per_stock / row[1].Close),
                             'Exit_Date': '',
                             'Exit_Price': '',
                             'Gain': '',
