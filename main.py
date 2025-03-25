@@ -23,8 +23,8 @@ if __name__ == '__main__':
     print_hi('PyCharm')
 
     target = "US"
-    if target == "US":
-        startDate = "20240906"
+    if target == "US"   :
+        startDate = "20250324"
     else:
         startDate = "20240205"
 
@@ -32,7 +32,6 @@ if __name__ == '__main__':
         # Gather data and rank them
         # ranking based on RDX
         rank = rankData.RankData(target, interval="1d")
-        # rank = rankData.RankData(target, interval="1d", isETFs=True)
         df = rank.load_data()
         rank.rank_data()
 
